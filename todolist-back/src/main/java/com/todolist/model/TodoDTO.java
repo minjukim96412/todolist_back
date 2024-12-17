@@ -17,6 +17,6 @@ public class TodoDTO {
     private Timestamp createDate;
     private Timestamp updateDate;
     private Boolean completeYn;
-    private String memId;
+    private Integer memId;
 	
 }

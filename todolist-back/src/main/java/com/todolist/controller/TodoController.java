@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.todolist.model.MemberEntity;
+import com.todolist.model.TodoDTO;
 import com.todolist.model.TodoEntity;
 import com.todolist.service.TodoService;
 
@@ -45,9 +47,22 @@ public class TodoController {
     }
 
     @PostMapping
-    public TodoEntity addTodo(@RequestBody TodoEntity todo) {
-        return todoService.addTodo(todo);
+    public ResponseEntity<TodoEntity> addTodo(@RequestBody TodoDTO todoDTO) {
+        TodoEntity todo = new TodoEntity();
+        todo.setTitle(todoDTO.getTitle());
+        todo.setContent(todoDTO.getContent());
+        todo.setStartDate(todoDTO.getStartDate());
+        todo.setEndDate(todoDTO.getEndDate());
+        
+        // MEM_ID를 MemberEntity로 변환하여 저장
+        MemberEntity member = new MemberEntity();
+        member.setMemId(todoDTO.getMemId());
+        todo.setMember(member);
+
+        TodoEntity savedTodo = todoService.addTodo(todo);
+        return ResponseEntity.ok(savedTodo);
     }
+
 
     @PutMapping("/{id}")
     public TodoEntity updateTodo(@PathVariable Long id, @RequestBody TodoEntity todo) {

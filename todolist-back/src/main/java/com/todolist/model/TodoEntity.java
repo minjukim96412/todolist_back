@@ -18,11 +18,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import jakarta.persistence.PrePersist;
+
 @Entity
 @Table(name = "TODOLIST")
 @Getter
 @Setter
-@AllArgsConstructor 
+@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class TodoEntity {
@@ -30,32 +32,39 @@ public class TodoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TODO_ID")
-    private Integer todoId; 
-    
+    private Integer todoId;
+
     @Column(name = "TITLE", length = 200)
     private String title;
-    
+
     @Column(name = "CONTENT", length = 4000)
     private String content;
-    
+
     @Column(name = "START_DATE")
-    private Timestamp startDate; 
-    
+    private Timestamp startDate;
+
     @Column(name = "END_DATE")
-    private Timestamp endDate; 
-    
+    private Timestamp endDate;
+
     @Column(name = "CREATE_DATE", updatable = false)
-    private Timestamp createDate; 
-    
+    private Timestamp createDate;
+
     @Column(name = "UPDATE_DATE", insertable = false)
-    private Timestamp updateDate; 
-    
+    private Timestamp updateDate;
+
     @Column(name = "COMPLETEYN", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private Boolean completeYn = false;
-    
+
     @ManyToOne
     @JoinColumn(name = "MEM_ID")
     @JsonIgnore
     private MemberEntity member;
 
+    // 엔티티가 삽입되기 전에 실행되는 메서드
+    @PrePersist
+    protected void onCreate() {
+        if (this.createDate == null) {
+            this.createDate = new Timestamp(System.currentTimeMillis());
+        }
+    }
 }
