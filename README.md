@@ -6,7 +6,14 @@
 - 소셜 API를 사용하여 로그인 기능을 구현하였습니다.
 - 캘린더를 활용하여 해당날짜를 선택하여 일정을 확인하고
   추가,수정,삭제 할 수 있습니다.
+  
 ## ➡️ 프로젝트 실행방법
+- 터미널 <br/>
+mysql -u root -p <br/>
+- mysql todolist_db 데이터베이스 생성 <br/>
+CREATE DATABASE todolist_db <br/>
+- todo 계정 생성 <br/> 
+CREATE USER 'todo'@'localhost' IDENTIFIED BY 'todo' <br/>
 - 테이블 생성 <br/>
 **sql 파일** : https://github.com/minjukim96412/todolist_back/blob/main/todolist-back/src/main/resources/templates/todolist.sql <br />
 CREATE TABLE MEMBER ( 
@@ -37,7 +44,8 @@ CREATE TABLE CALENDAR (
 );
 <br/>
 - spring build
-  /todolist-back/src/main/java/com/todolist/TodolistBackApplication.java - 실행
+  /todolist-back/src/main/java/com/todolist/TodolistBackApplication.java - 실행 <br />
+  
 ## 🛠️ 기술 스택 todolist_back
 <img src="https://simpleicons.org/icons/springboot.svg" width="50px"/> **Spring boot :**  스프링부트 프레임워크를 사용하였습니다.<br />
 <img src="https://simpleicons.org/icons/kakaotalk.svg" width="50px"/> **kakao API :**  카카오API를 활용하여 소셜로그인을 구현하였습니다.<br />
