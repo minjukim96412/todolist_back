@@ -52,3 +52,6 @@ CREATE TABLE CALENDAR (
 <img src="https://simpleicons.org/icons/google.svg" width="50px"/> **google API :**  구글API를 활용하여 소셜로그인을 구현하였습니다.<br />
 <img src="todolist-back/src/main/resources/templates/JPA.png" width="50px" /> **JPA :** JPA를 사용하여 데이터를 객체와 매핑하여 DB와 상호작용하였습니다.<br />
 <img src="https://simpleicons.org/icons/apachemaven.svg" width="50px" /> **maven :** maven을 사용하여 필요한 라이브러리를 관리하고 빌드를 수행하였습니다.<br />
+
+## 📝 API명세서
+- 서버 실행 후 접속 http://localhost:8888/swagger-ui/index.html
