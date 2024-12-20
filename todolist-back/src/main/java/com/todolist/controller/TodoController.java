@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,6 +47,13 @@ public class TodoController {
         return ResponseEntity.ok(todos); 
     }
 
+    @GetMapping("/{todoId}")
+    public ResponseEntity<TodoEntity> getTodoByTodoId(@PathVariable Long todoId) {
+        TodoEntity todo = todoService.getTodoById(todoId);
+        return ResponseEntity.ok(todo);
+    }
+
+    
     @PostMapping
     public ResponseEntity<TodoEntity> addTodo(@RequestBody TodoDTO todoDTO) {
         TodoEntity todo = new TodoEntity();
@@ -64,13 +72,44 @@ public class TodoController {
     }
 
 
-    @PutMapping("/{id}")
-    public TodoEntity updateTodo(@PathVariable Long id, @RequestBody TodoEntity todo) {
-        return todoService.updateTodo(id, todo);
+    @PutMapping("/{todoId}")
+    public TodoEntity updateTodo(@PathVariable Long todoId, @RequestBody TodoEntity todo) {
+        return todoService.updateTodo(todoId, todo);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteTodo(@PathVariable Long id) {
-        todoService.deleteTodo(id);
+    @DeleteMapping("/{todoId}")
+    public void deleteTodo(@PathVariable Long todoId) {
+        todoService.deleteTodo(todoId);
     }
+    
+    @PatchMapping("/{todoId}")
+    public ResponseEntity<TodoEntity> patchTodo(@PathVariable Long todoId, @RequestBody TodoDTO todoDTO) {
+        // 기존 일정 가져오기
+        TodoEntity existingTodo = todoService.getTodoById(todoId);
+
+        if (todoDTO.getCompleteYn() != null) {
+            existingTodo.setCompleteYn(todoDTO.getCompleteYn());
+        }
+        
+        // 다른 필드들 업데이트
+        if (todoDTO.getTitle() != null) {
+            existingTodo.setTitle(todoDTO.getTitle());
+        }
+        if (todoDTO.getContent() != null) {
+            existingTodo.setContent(todoDTO.getContent());
+        }
+        if (todoDTO.getStartDate() != null) {
+            existingTodo.setStartDate(todoDTO.getStartDate());
+        }
+        if (todoDTO.getEndDate() != null) {
+            existingTodo.setEndDate(todoDTO.getEndDate());
+        }
+
+        // 수정된 일정 저장
+        TodoEntity updatedTodo = todoService.updateTodo(todoId, existingTodo);
+        
+        return ResponseEntity.ok(updatedTodo);
+    }
+
+
 }

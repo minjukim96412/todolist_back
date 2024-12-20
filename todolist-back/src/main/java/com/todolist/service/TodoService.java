@@ -53,8 +53,8 @@ public class TodoService {
  
 
     // 할 일 수정
-    public TodoEntity updateTodo(Long id, TodoEntity todo) {
-        Optional<TodoEntity> existingTodoOptional = todoRepository.findById(id);
+    public TodoEntity updateTodo(Long todoId, TodoEntity todo) {
+        Optional<TodoEntity> existingTodoOptional = todoRepository.findById(todoId);
         
         if (existingTodoOptional.isPresent()) {
             TodoEntity existingTodo = existingTodoOptional.get();
@@ -65,13 +65,13 @@ public class TodoService {
             existingTodo.setCompleteYn(todo.getCompleteYn());
             return todoRepository.save(existingTodo);
         } else {
-            throw new RuntimeException("Todo not found with id: " + id);
+            throw new RuntimeException("Todo not found with id: " + todoId);
         }
     }
 
     // 할 일 삭제
-    public void deleteTodo(Long id) {
-        todoRepository.deleteById(id);
+    public void deleteTodo(Long todoId) {
+        todoRepository.deleteById(todoId);
     }
     
     private void addDatesToCalendar(TodoEntity todo) {
@@ -90,4 +90,8 @@ public class TodoService {
     public MemberEntity getMemberByEmail(String email) {
         return memberRepository.findByEmail(email);
     }
+
+	public TodoEntity getTodoById(Long todoId) {
+		return todoRepository.getTodoByTodoId(todoId);
+	}
 }

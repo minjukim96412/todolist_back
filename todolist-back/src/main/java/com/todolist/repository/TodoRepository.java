@@ -12,6 +12,9 @@ import com.todolist.model.TodoEntity;
 public interface TodoRepository extends JpaRepository<TodoEntity, Long> {
 	public List<TodoEntity> findByStartDate(Timestamp startDate);
 
-	List<TodoEntity> findByMember_MemId(Long memId);
+	public List<TodoEntity> findByMember_MemId(Long memId);
+
+	public TodoEntity getTodoByTodoId(Long todoId);
+
 	
 }
