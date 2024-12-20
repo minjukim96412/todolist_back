@@ -43,7 +43,8 @@ CREATE TABLE CALENDAR (
     CONSTRAINT FK_MEM FOREIGN KEY (MEM_ID) REFERENCES MEMBER(MEM_ID)
 );
 <br/>
-- spring build
+
+- 스프링 어플리케이션 실행방법<br />
   /todolist-back/src/main/java/com/todolist/TodolistBackApplication.java - 실행 <br />
   
 ## 🛠️ 기술 스택 todolist_back
