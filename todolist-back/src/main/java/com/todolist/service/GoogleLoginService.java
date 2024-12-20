@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
@@ -25,6 +26,7 @@ public class GoogleLoginService {
     @Autowired
     private MemberRepository memberRepository;
 
+    @Transactional
     public MemberEntity handleGoogleLogin(GoogleLoginDTO googleLoginDto) {
         try {
             logger.info("Processing Google login for tokenId: {}", googleLoginDto.getTokenId());
@@ -47,7 +49,7 @@ public class GoogleLoginService {
 	            member.setNickname(googleLoginDto.getNickname());
 	            member.setTokenId(tokenId);
 	            memberRepository.save(member);
-	
+	            memberRepository.flush();
 	            logger.info("New user registered: {}", email);
 	            return member;
             }

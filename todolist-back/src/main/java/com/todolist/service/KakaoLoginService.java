@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.todolist.model.KakaoLoginDTO;
 import com.todolist.model.MemberEntity;
@@ -19,7 +20,7 @@ public class KakaoLoginService {
 	@Autowired
     private MemberRepository memberRepository;
 	
-	
+	@Transactional
 	public MemberEntity handleKakaoLogin(KakaoLoginDTO kakaoLoginDto) {
 		try {
 			logger.info("Processing Kakao login for tokenId: {}", kakaoLoginDto.getTokenId());
@@ -42,7 +43,7 @@ public class KakaoLoginService {
 	            member.setNickname(kakaoLoginDto.getNickname());
 	            member.setTokenId(tokenId);
 	            memberRepository.save(member);
-	
+	            memberRepository.flush();
 	            logger.info("New user registered: {}", email);
 	            return member;
 	        }
