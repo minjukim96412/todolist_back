@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -22,14 +21,17 @@ public class SecurityConfig {
             .and()
             .csrf().disable()
             .authorizeRequests()
+            // Swagger UI와 관련된 경로 허용
+            .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() 
+            // API와 특정 경로 허용
             .requestMatchers("/api/**", "/check-user").permitAll()  // /check-user 경로도 허용
-            .anyRequest().authenticated()
+            .anyRequest().authenticated()  // 다른 모든 요청은 인증 필요
             .and()
             .headers()
-            .addHeaderWriter((request, response) -> {
-                response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
-                response.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
-            });
+                .addHeaderWriter((request, response) -> {
+                    response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+                    response.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+                });
 
         return http.build();
     }
@@ -47,4 +49,3 @@ public class SecurityConfig {
         return source;
     }
 }
-

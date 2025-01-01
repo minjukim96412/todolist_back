@@ -9,12 +9,12 @@ import org.springframework.stereotype.Repository;
 import com.todolist.model.TodoEntity;
 
 @Repository
-public interface TodoRepository extends JpaRepository<TodoEntity, Long> {
+public interface TodoRepository extends JpaRepository<TodoEntity, Integer> {
 	public List<TodoEntity> findByStartDate(Timestamp startDate);
 
-	public List<TodoEntity> findByMember_MemId(Long memId);
+	public List<TodoEntity> findByMember_MemId(Integer memId);
 
-	public TodoEntity getTodoByTodoId(Long todoId);
+	public TodoEntity getTodoByTodoId(Integer todoId);
 
 	
 }

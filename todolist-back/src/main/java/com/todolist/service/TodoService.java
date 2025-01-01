@@ -44,7 +44,7 @@ public class TodoService {
     }
 
     // 특정 memId로 해당 멤버의 모든 일정 조회
-    public List<TodoEntity> getTodosByMemId(Long memId) {
+    public List<TodoEntity> getTodosByMemId(Integer memId) {
         List<TodoEntity> todos = todoRepository.findByMember_MemId(memId);
         System.out.println("Retrieved Todos: " + todos);
         return todos;
@@ -53,7 +53,7 @@ public class TodoService {
  
 
     // 할 일 수정
-    public TodoEntity updateTodo(Long todoId, TodoEntity todo) {
+    public TodoEntity updateTodo(Integer todoId, TodoEntity todo) {
         Optional<TodoEntity> existingTodoOptional = todoRepository.findById(todoId);
         
         if (existingTodoOptional.isPresent()) {
@@ -70,7 +70,7 @@ public class TodoService {
     }
 
     // 할 일 삭제
-    public void deleteTodo(Long todoId) {
+    public void deleteTodo(Integer todoId) {
         todoRepository.deleteById(todoId);
     }
     
@@ -91,7 +91,7 @@ public class TodoService {
         return memberRepository.findByEmail(email);
     }
 
-	public TodoEntity getTodoById(Long todoId) {
+	public TodoEntity getTodoById(Integer todoId) {
 		return todoRepository.getTodoByTodoId(todoId);
 	}
 }
