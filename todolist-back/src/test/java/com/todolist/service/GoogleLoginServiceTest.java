@@ -87,6 +87,6 @@ class GoogleLoginServiceTest {
         );
 
         assertEquals("Unexpected error during Google login", exception.getMessage());
-        verify(memberRepository, times(1)).findByEmail(googleLoginDto.getEmail());
+        verify(memberRepository, times(1)).findByEmail(googleLoginDto.getEmail()); 
     }
 }

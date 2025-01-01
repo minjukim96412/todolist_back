@@ -25,7 +25,7 @@ class MemberServiceTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);  // Mockito 초기화
+        MockitoAnnotations.openMocks(this);  // Mockito 초기화 
     }
     
     @Test

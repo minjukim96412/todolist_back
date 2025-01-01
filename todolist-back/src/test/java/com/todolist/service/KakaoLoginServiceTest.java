@@ -26,7 +26,7 @@ class KakaoLoginServiceTest {
 
     @InjectMocks
     private KakaoLoginService kakaoLoginService;
-
+ 
     private KakaoLoginDTO kakaoLoginDto;
     private MemberEntity existingMember;
     private MemberEntity newMember;

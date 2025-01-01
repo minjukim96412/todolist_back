@@ -131,5 +131,5 @@ class MemberControllerTest {
                 .andExpect(jsonPath("$.user.tokenId").value("testToken"));
 
         verify(memberService, times(1)).checkEmailExists("test@example.com");
-    }
+    } 
 }

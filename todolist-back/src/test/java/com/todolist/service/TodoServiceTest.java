@@ -102,7 +102,7 @@ class TodoServiceTest {
         updatedTodo.setEndDate(Timestamp.valueOf(LocalDateTime.now().plusDays(2)));
         updatedTodo.setCompleteYn(true);
 
-        when(todoRepository.findById(todo.getTodoId())).thenReturn(Optional.of(todo));
+        when(todoRepository.findById(todo.getTodoId())).thenReturn(Optional.of(todo)); 
         when(todoRepository.save(any(TodoEntity.class))).thenReturn(updatedTodo);
 
         TodoEntity result = todoService.updateTodo(todo.getTodoId(), updatedTodo);
