@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -58,11 +59,11 @@ public class TodoController {
         @ApiResponse(responseCode = "200", description = "회원의 To-Do 목록 조회 성공",
             content = @Content(mediaType = "application/json", schema = @Schema(implementation = TodoEntity.class)))
     })
-    @GetMapping("/mem/{memId}")
-    public ResponseEntity<List<TodoEntity>> getTodosByMember(
+    @GetMapping("/mem/{memId}/calendar")
+    public ResponseEntity<Map<String, List<TodoEntity>>> getTodosCalendarByMember(
         @Parameter(description = "회원 ID", required = true) @PathVariable Integer memId) {
-        List<TodoEntity> todos = todoService.getTodosByMemId(memId);
-        return ResponseEntity.ok(todos);
+        Map<String, List<TodoEntity>> calendarTodos = todoService.getTodosCalendarByMemId(memId);
+        return ResponseEntity.ok(calendarTodos);
     }
 
     @Operation(summary = "특정 To-Do 조회", description = "To-Do ID로 특정 To-Do의 상세 정보를 반환합니다.")
