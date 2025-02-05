@@ -3,21 +3,20 @@ package com.todolist.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;  // 이 부분이 변경됨
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.api.client.util.Value;
-
 @RestController
 @RequestMapping("/api")
 public class ConfigController {
 
-    @Value("${oauth.kakao.client-id}")  // application.properties에서 가져올 값
+    @Value("${oauth.kakao.client-id}")
     private String kakaoClientId;
 
-    @Value("${oauth.google.client-id}")  // application.properties에서 가져올 값
+    @Value("${oauth.google.client-id}")
     private String googleClientId;
 
     @GetMapping("/config")
