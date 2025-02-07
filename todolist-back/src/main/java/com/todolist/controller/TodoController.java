@@ -78,6 +78,20 @@ public class TodoController {
         return ResponseEntity.ok(todo);
     }
 
+    @Operation(summary = "완료된 To-Do 목록 조회", description = "특정 회원의 완료된 일정(completeYn = true) 목록을 반환합니다.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "완료된 To-Do 목록 조회 성공",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = TodoEntity.class)))
+    })
+    @GetMapping("/completed/{memId}")
+    public ResponseEntity<List<TodoEntity>> getCompletedTodos(
+        @Parameter(description = "회원 ID", required = true) @PathVariable Integer memId) {
+        
+        List<TodoEntity> completedTodos = todoService.getCompletedTodos(memId);
+        return ResponseEntity.ok(completedTodos);
+    }
+
+    
     @Operation(summary = "새로운 To-Do 추가", description = "새로운 To-Do를 추가합니다.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "To-Do 추가 성공",

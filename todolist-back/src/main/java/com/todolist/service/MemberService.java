@@ -23,5 +23,11 @@ public class MemberService {
         return memberRepository.findByEmail(email);
     }
 
+    //닉네임 수정
+    public MemberEntity updateNickname(Integer memId, String newNickname) {
+        MemberEntity member = memberRepository.findByMemId(memId);
+        member.setNickname(newNickname);
+        return memberRepository.save(member); // 업데이트된 사용자 정보 반환
+    }
 
 }

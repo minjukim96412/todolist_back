@@ -16,5 +16,7 @@ public interface TodoRepository extends JpaRepository<TodoEntity, Integer> {
 
 	public TodoEntity getTodoByTodoId(Integer todoId);
 
+	public List<TodoEntity> findByMemberMemIdAndCompleteYn(Integer memId, Boolean completeYn);
+
 	
 }

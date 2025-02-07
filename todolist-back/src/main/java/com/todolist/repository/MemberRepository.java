@@ -15,6 +15,8 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Integer> {
 
     // 닉네임 중복 체크
     boolean existsByNickname(String nickname);
+
+	MemberEntity findByMemId(Integer memId);
 }
 
 

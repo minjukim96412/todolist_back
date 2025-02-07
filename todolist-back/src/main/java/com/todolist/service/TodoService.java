@@ -173,4 +173,8 @@ public class TodoService {
 	    
 	    return calendarTodos;
 	}
+
+	public List<TodoEntity> getCompletedTodos(Integer memId) {
+		return todoRepository.findByMemberMemIdAndCompleteYn(memId, true);
+	}
 }
